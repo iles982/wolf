@@ -1,0 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/23 12:13:01 by tclarita          #+#    #+#             */
+/*   Updated: 2020/03/23 13:07:13 by tclarita         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "wolf.h"
+
+int     get_height(char	*file)
+{
+    int		i;
+	char	*line;
+	int		fd;
+
+    i = 0;
+	fd = open(file, O_RDONLY);
+    while (get_next_line(fd, &line) > 0)
+	{
+		i++;
+		free(line);
+	}
+	free(line);
+	close(fd);
+	return (i);
+}
+
+int		get_width(char	*file)
+{
+	int		fd;
+	char	*line;
+	int		i;
+	int		res;
+	char	**tmp;
+
+	i = -1;
+	res = 0;
+	fd = open(file, O_RDONLY);
+	get_next_line(fd, &line);
+	tmp = ft_strsplit(line, ' ');
+	while (tmp[++i])
+	{
+		res++;
+		free(tmp[i]);
+	}
+	free(tmp);
+	free(line);
+	close(fd);
+	return (res);
+}
+
+int		*fill_map(char *line, int *map_line)
+{
+	char	**tmp;
+	int		i;
+
+	i = 0;
+	tmp = ft_strsplit(line, ' ');
+	while (tmp[i])
+	{
+		map_line[i] = ft_atoi(tmp[i]);
+		free(tmp[i]);
+		i++;
+	}
+	free(tmp);
+	return (map_line);
+}
+
+int		**read_map(char	*file, t_wolf *sdl)
+{
+	int		**map;
+	int		i;
+	int		fd;
+	char	*line;
+
+	i = 0;
+    sdl->map_num_col = get_width(file);
+	sdl->map_num_row = get_height(file);
+	map = (int **)malloc(sizeof(int *) * sdl->map_num_row);
+	fd = open(file, O_RDONLY);
+	while (i < sdl->map_num_row && get_next_line(fd, &line) > 0)
+	{
+		map[i] = (int *)malloc(sizeof(int) * sdl->map_num_col);
+		map[i] = fill_map(line, map[i]);
+		free(line);
+		i++;
+	}
+	close(fd);
+	return (map);
+}
