@@ -6,13 +6,13 @@
 #    By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/20 12:14:15 by tclarita          #+#    #+#              #
-#    Updated: 2020/03/23 12:37:16 by tclarita         ###   ########.fr        #
+#    Updated: 2020/04/01 12:29:44 by tclarita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf
+NAME = wolf3d
 
-SRC = wolf.c read_map.c
+SRC = wolf.c read_map.c setup.c sdl_window.c key.c update.c tools.c cast_ray.c
 
 OBJ = $(SRC:.c=.o)
 

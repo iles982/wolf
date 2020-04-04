@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/03/23 13:07:26 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/04/01 13:51:00 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,36 @@
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 832
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+
+typedef struct		s_cast
+{
+	int				ray_face_up;
+	int				ray_face_down;
+	int				ray_face_left;
+	int				ray_face_right;
+	float			x_inter;
+	float			y_inter;
+	float			x_step;
+	float			y_step;
+	int				horz_wall_hit;
+	float			horz_wall_hit_x;
+	float			horz_wall_hit_y;
+	int				horz_wall_content;
+	float			next_horz_touch_x;
+	float			next_horz_touch_y;
+	float			x_to_check;
+	float			y_to_check;
+	int				vert_wall_hit;
+	float			vert_wall_hit_x;
+	float			vert_wall_hit_y;
+	int				vert_wall_content;
+	float			next_vert_touch_x;
+	float			next_vert_touch_y;
+	float			horz_hit_distance;
+	float			vert_hit_distance;
+}					t_cast;
 
 typedef struct		s_wolf
 {
@@ -28,6 +58,10 @@ typedef struct		s_wolf
 	SDL_Renderer	*renderer;
 	SDL_Event		event;
 	SDL_Rect		rect;
+	SDL_Texture		*color_buf_text;
+	Uint32			*color_buf;
+	Uint32			*wall_text;
+	Uint32			*textures[4];
 	int				**map;
 	double			pi;
 	double			two_pi;
@@ -67,6 +101,17 @@ typedef struct		s_ray
 	int				wall_hit;
 }					t_ray;
 
-int			**read_map(char	*file, t_wolf *sdl);
+int					**read_map(char	*file, t_wolf *sdl);
+void				setup(t_wolf *sdl, t_player *player);
 
+
+void    			init_window(t_wolf *sdl);
+void				destroy_window(t_wolf *sdl);
+void				process(t_wolf *sdl, t_player *player);
+void				update(t_wolf *sdl, t_player *player, t_ray ray[1280]);
+void				cast_ray(double ray_angle, t_wolf *sdl, t_player *player, t_ray *ray);
+int					map_has_wall(float y, float x, t_wolf *sdl);
+double				normalize_angle(double angle, t_wolf *sdl);
+float				distance_between(float x1, float y1, float x2, float y2);
+void				cast_ray(double ray_angle, t_wolf *sdl, t_player *player, t_ray *ray);
 #endif

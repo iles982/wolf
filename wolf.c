@@ -6,108 +6,34 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:25 by tclarita          #+#    #+#             */
-/*   Updated: 2020/03/23 13:07:41 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/04/03 15:23:02 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void    init_window(t_wolf *sdl)
-{
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
-        printf("%s", "Error init_SDL");
-    }
-	sdl->window = SDL_CreateWindow("Wolf", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_BORDERLESS);
-	if (!(sdl->window))
-		printf("%s", "Window Error");
-	sdl->renderer = SDL_CreateRenderer(sdl->window, -1, 0);
-	if (!sdl->renderer)
-		printf("%s", "Error Renderer");
-	SDL_SetRenderDrawBlendMode(sdl->renderer, SDL_BLENDMODE_BLEND);
-}
-
-void	destroy_window(t_wolf *sdl)
-{
-	SDL_DestroyRenderer(sdl->renderer);
-	SDL_DestroyWindow(sdl->window);
-	SDL_Quit();
-	exit(0);
-}
-
-void	cast_ray(double ray_angle, int strip_id)
-{
-	
-}
-
-void	cast_all_rays(t_ray ray[1280], t_player *player, t_wolf *sdl)
-{
-	double	ray_angle;
-	int		strip_id;
-
-	strip_id = 0;
-	ray_angle = player->rotat_angle - (sdl->fov_angle / 2);
-	while (strip_id < sdl->num_rays)
-	{
-		cast_ray(ray_angle, strip_id);
-		ray_angle += sdl->fov_angle / sdl->num_rays;
-		strip_id++;
-	}
-}
-
-int		map_has_wall(float y, float x, t_wolf *sdl)
-{
-	int		map_y;
-	int		map_x;
-
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
-		return (0);
-	map_y = floor(y / sdl->tile_size);
-	map_x = floor(x / sdl->tile_size);
-	return (sdl->map[map_y][map_x] != 0);
-}
-
-void	move_player(t_wolf *sdl, t_player *player, float delta_time)
-{
-	float move_step;
-	float new_player_x;
-	float new_player_y;
-
-	player->rotat_angle += player->turn_direction * player->turn_speed * delta_time;
-	move_step = player->walk_direction * player->walk_speed;
-	new_player_x = player->x + cos(player->rotat_angle) * move_step;
-	new_player_y = player->y + sin(player->rotat_angle) * move_step;
-	if (!(map_has_wall(new_player_y, new_player_x, sdl)))
-	{
-		player->x = new_player_x;
-		player->y = new_player_y;
-	}
-}
-
-void	update(t_wolf *sdl, t_player *player, t_ray ray[1280])
-{
-	float	delta_time;
-	float	frame_time;
-
-	frame_time = 1000 / 30;
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), sdl->frame_ticks + frame_time))
-		;
-	delta_time = (SDL_GetTicks() - sdl->frame_ticks) / 1000.0;
-	sdl->frame_ticks = SDL_GetTicks();
-	move_player(sdl, player, delta_time);
-	cast_all_rays(ray, player, sdl);
-}
-
 void	render_player(t_wolf *sdl, t_player *player)
 {
-	SDL_SetRenderDrawColor(sdl->renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(sdl->renderer, 251, 25, 25, 255);
 	SDL_Rect player_rect = {player->x * sdl->scale_factor, player->y * sdl->scale_factor,
 	player->width * sdl->scale_factor, player->height * sdl->scale_factor};
 	SDL_RenderFillRect(sdl->renderer, &player_rect);
 	SDL_RenderDrawLine(sdl->renderer, player->x * sdl->scale_factor, player->y * sdl->scale_factor,
-	sdl->scale_factor * player->x + cos(player->rotat_angle) * 40,
-	sdl->scale_factor * player->y + sin(player->rotat_angle) * 40);
+	sdl->scale_factor * player->x + cos(player->rotat_angle) * 10,
+	sdl->scale_factor * player->y + sin(player->rotat_angle) * 10);
+}
+
+void	render_rays(t_wolf *sdl, t_ray ray[1280], t_player *player)
+{
+	SDL_SetRenderDrawColor(sdl->renderer, 76, 0, 153, 255);
+	int i = 0;
+	while (i < sdl->num_rays)
+	{
+		SDL_RenderDrawLine(sdl->renderer, sdl->scale_factor * player->x,
+		sdl->scale_factor * player->y, sdl->scale_factor * ray[i].wall_hit_x,
+		sdl->scale_factor * ray[i].wall_hit_y);
+		i++;
+	}
 }
 
 void	render_map(t_wolf *sdl)
@@ -138,72 +64,104 @@ void	render_map(t_wolf *sdl)
 	}
 }
 
-void	render(t_wolf *sdl, t_player *player)
+void	clear_color_buf(Uint32 color, t_wolf *sdl)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < WINDOW_WIDTH)
+	{
+		y = 0;
+		while (y < WINDOW_HEIGHT)
+		{
+			sdl->color_buf[WINDOW_WIDTH  * y + x] = color;
+			y++;
+		}
+		x++;
+	}
+}
+
+void	render_color_buf(t_wolf *sdl)
+{
+	SDL_UpdateTexture(sdl->color_buf_text, NULL, sdl->color_buf, (int)((Uint32)WINDOW_WIDTH * sizeof(Uint32)));
+	SDL_RenderCopy(sdl->renderer, sdl->color_buf_text, NULL, NULL);
+}
+
+void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
+{
+	int		i;
+	int		y;
+	int		x;
+	int		wall_strip_height;
+	int		wall_top_pix;
+	int		wall_bot_pix;
+	float	distance;
+	float	distance_perp;
+	float	proj_wall_height;
+	int		text_offset_x;
+	int		text_offset_y;
+	int		distance_from_top;
+	i = 0;
+	while (i < sdl->num_rays)
+	{
+		distance_perp = ray[i].distance * cos(ray[i].ray_angle - player->rotat_angle);
+		distance = (WINDOW_WIDTH / 2) / tan(sdl->fov_angle / 2);
+		proj_wall_height = (sdl->tile_size / distance_perp) * distance;
+		wall_strip_height = (int)proj_wall_height;
+		wall_top_pix = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+		wall_top_pix = wall_top_pix < 0 ? 0 : wall_top_pix;
+		wall_bot_pix = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
+		wall_bot_pix = wall_bot_pix > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bot_pix;
+		
+		y = 0;
+		while (y < wall_top_pix)
+		{
+			sdl->color_buf[WINDOW_WIDTH * y + i] = 0xFF333333;
+			y++;
+		}
+		y = wall_top_pix;
+		if (ray[i].was_hit_vertical == 1)
+			text_offset_x = (int)ray[i].wall_hit_y % sdl->tile_size;
+		else
+			text_offset_x = (int)ray[i].wall_hit_x % sdl->tile_size;
+		int text_num = ray[i].wall_hit - 1;
+		while (y < wall_bot_pix)
+		{
+			distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+			text_offset_y = distance_from_top * ((float)TEXTURE_HEIGHT / wall_strip_height);
+			Uint32 texel_color = sdl->textures[text_num][(TEXTURE_HEIGHT * text_offset_y) + text_offset_x];
+			sdl->color_buf[(WINDOW_WIDTH * y) + i] = texel_color;
+			y++;
+		}
+		y = wall_bot_pix;
+		while (y < WINDOW_HEIGHT)
+		{
+			sdl->color_buf[WINDOW_WIDTH * y + i] = 0xFF777777;
+			y++;
+		}
+		i++;
+	}
+}
+
+void	render(t_wolf *sdl, t_player *player, t_ray ray[1280])
 {
 	SDL_SetRenderDrawColor(sdl->renderer, 0, 0, 0, 255);
 	SDL_RenderClear(sdl->renderer);
 
+	generate_3d_projection(sdl, ray, player);
+
+	render_color_buf(sdl);
+	clear_color_buf(0xFF000000, sdl);
 	render_map(sdl);
-	// render_rays();
+	render_rays(sdl, ray, player);
 	render_player(sdl, player);
 	SDL_RenderPresent(sdl->renderer);
 }
 
-void	process(t_wolf *sdl, t_player *player)
+void	sprites()
 {
-	SDL_PollEvent(&sdl->event);
-	switch (sdl->event.type)
-	{
-		case SDL_QUIT: 
-			destroy_window(sdl);
-		case SDL_KEYDOWN:
-		{
-			if (sdl->event.key.keysym.sym == SDLK_ESCAPE)
-				destroy_window(sdl);
-			if (sdl->event.key.keysym.sym == SDLK_UP)
-				player->walk_direction = 1;
-			if (sdl->event.key.keysym.sym == SDLK_DOWN)
-				player->walk_direction = -1;
-			if (sdl->event.key.keysym.sym == SDLK_RIGHT)
-				player->turn_direction = 1;
-			if (sdl->event.key.keysym.sym == SDLK_LEFT)
-				player->turn_direction = -1;
-			break ;
-		}
-		case SDL_KEYUP:
-		{
-			if (sdl->event.key.keysym.sym == SDLK_UP)
-				player->walk_direction = 0;
-			if (sdl->event.key.keysym.sym == SDLK_DOWN)
-				player->walk_direction = 0;
-			if (sdl->event.key.keysym.sym == SDLK_RIGHT)
-				player->turn_direction = 0;
-			if (sdl->event.key.keysym.sym == SDLK_LEFT)
-				player->turn_direction = 0;
-			break;
-		}
-	}
-}
-
-void	setup(t_wolf *sdl, t_player *player)
-{
-	sdl->frame_ticks = 0;
-	sdl->pi = 3.14159265;
-	sdl->two_pi = 6.28318530;
-	sdl->tile_size = 64;
-	sdl->fov_angle = 60 * (sdl->pi / 180);
-	sdl->num_rays = 1280;
-	sdl->scale_factor = 1;
-	player->x = WINDOW_WIDTH / 2;
-	player->y = WINDOW_HEIGHT / 2;
-	player->height = 1;
-	player->width = 1;
-	player->turn_direction = 0;
-	player->walk_direction = 0;
-	player->rotat_angle = sdl->pi / 2;
-	player->walk_speed = 10;
-	player->turn_speed = 2 * 45 * (sdl->pi / 180);
-
+	
 }
 
 int		main(int ac, char **av)
@@ -211,15 +169,34 @@ int		main(int ac, char **av)
 	t_wolf		sdl[1];
 	t_player	player[1];
 	t_ray		ray[1280];
+	// Mix_Music	*music;
 
+	// // music = Mix_LoadMUS("Yayo.mp3");
+	// SDL_INIT_AUDIO;
+	// Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	// music = Mix_LoadMUS("Yayo.mp3");
+	// Mix_PlayingMusic();
 	sdl->map = read_map(av[1], sdl);
+	int	i = 0;
+	while (i < sdl->map_num_row)
+	{
+		int j = 0;
+		while (j < sdl->map_num_col)
+		{
+			ft_putnbr(sdl->map[i][j]);
+			j++;
+		}
+		write(1, "\n", 1);
+		i++;
+	}
 	init_window(sdl);
     setup(sdl, player); 
     while (1)
     {
+		srites();
         process(sdl, player);
         update(sdl, player, ray);
-        render(sdl, player);
+        render(sdl, player, ray);
     }
 	destroy_window(sdl);
     return (0);
