@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:25 by tclarita          #+#    #+#             */
-/*   Updated: 2020/04/03 15:23:02 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/04/05 11:44:33 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,6 @@ void	render(t_wolf *sdl, t_player *player, t_ray ray[1280])
 	SDL_RenderPresent(sdl->renderer);
 }
 
-void	sprites()
-{
-	
-}
-
 int		main(int ac, char **av)
 {
 	t_wolf		sdl[1];
@@ -193,7 +188,6 @@ int		main(int ac, char **av)
     setup(sdl, player); 
     while (1)
     {
-		srites();
         process(sdl, player);
         update(sdl, player, ray);
         render(sdl, player, ray);
