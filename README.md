@@ -10,8 +10,11 @@ Wolf3D
 ##Features
 
 Move in any directions
+
 Rotation with keys
+
 Textured Mode with wall and ceiling
+
 Walls collision
 
 ##How to use ?
