@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:25 by tclarita          #+#    #+#             */
-/*   Updated: 2020/04/05 11:44:33 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/09/17 09:14:12 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,26 +164,9 @@ int		main(int ac, char **av)
 	t_wolf		sdl[1];
 	t_player	player[1];
 	t_ray		ray[1280];
-	// Mix_Music	*music;
 
-	// // music = Mix_LoadMUS("Yayo.mp3");
-	// SDL_INIT_AUDIO;
-	// Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-	// music = Mix_LoadMUS("Yayo.mp3");
-	// Mix_PlayingMusic();
 	sdl->map = read_map(av[1], sdl);
 	int	i = 0;
-	while (i < sdl->map_num_row)
-	{
-		int j = 0;
-		while (j < sdl->map_num_col)
-		{
-			ft_putnbr(sdl->map[i][j]);
-			j++;
-		}
-		write(1, "\n", 1);
-		i++;
-	}
 	init_window(sdl);
     setup(sdl, player); 
     while (1)
