@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:13:57 by tclarita          #+#    #+#             */
-/*   Updated: 2020/04/01 18:43:54 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/19 14:07:22 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	setup(t_wolf *sdl, t_player *player)
 	SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 	sdl->textures[3] = (Uint32 *)DIRT;
 	sdl->textures[2] = (Uint32 *)BOOK;
-	sdl->textures[1] = (Uint32 *)BRICKS;
-	sdl->textures[0] = (Uint32 *)STONE;
+	sdl->textures[1] = (Uint32 *)STONE;
+	sdl->textures[0] = (Uint32 *)WALL;
 	get_player_pos(sdl, player);
 	player->height = 1;
 	player->width = 1;

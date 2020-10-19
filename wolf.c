@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:25 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/19 11:17:12 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:21:44 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	render_map(t_wolf *sdl)
 			tile_x = j * sdl->tile_size;
 			tile_y = i * sdl->tile_size;
 			tile_color = sdl->map[i][j] != 0 ? 255 : 0;
-
 			SDL_SetRenderDrawColor(sdl->renderer, tile_color, tile_color, tile_color, tile_color);
 			SDL_Rect map_tile_rect = {tile_x * sdl->scale_factor, tile_y * sdl->scale_factor,
 			sdl->tile_size * sdl->scale_factor, sdl->tile_size * sdl->scale_factor};
