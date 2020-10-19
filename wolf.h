@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/04/01 13:51:00 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/19 11:09:17 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,23 @@ typedef struct		s_ray
 	int				wall_hit;
 }					t_ray;
 
+typedef struct		s_projection
+{
+	int				i;
+	int				y;
+	int				x;
+	int				wall_strip_height;
+	int				wall_top_pix;
+	int				wall_bot_pix;
+	int				text_offset_x;
+	int				text_offset_y;
+	int				distance_from_top;
+	Uint32			texel_color;
+	float			distance;
+	float			distance_perp;
+	float			proj_wall_height;
+}					t_projection;
+
 int					**read_map(char	*file, t_wolf *sdl);
 void				setup(t_wolf *sdl, t_player *player);
 
@@ -114,4 +131,5 @@ int					map_has_wall(float y, float x, t_wolf *sdl);
 double				normalize_angle(double angle, t_wolf *sdl);
 float				distance_between(float x1, float y1, float x2, float y2);
 void				cast_ray(double ray_angle, t_wolf *sdl, t_player *player, t_ray *ray);
+void				generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player);
 #endif
