@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 11:01:19 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/19 11:16:14 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/19 20:25:29 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    generate_3d_projection_1(t_wolf * sdl, t_ray ray[1280], t_player *player
     p->y = 0;
     while (p->y < p->wall_top_pix)
     {
-        sdl->color_buf[WINDOW_WIDTH * p->y + p->i] = 0xFF333333;
+        sdl->color_buf[WINDOW_WIDTH * p->y + p->i] = 0xFF0080FF;
         p->y++;
     }
     p->y = p->wall_top_pix;

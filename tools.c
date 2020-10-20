@@ -6,11 +6,33 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:24:45 by tclarita          #+#    #+#             */
-/*   Updated: 2020/04/01 12:25:21 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/20 10:12:46 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void	check_input(int ac, char **av)
+{
+	int fd;
+
+	if (ac != 2)
+	{
+		ft_putstr("Wrong input format\n");
+		exit(1);
+	}
+	if (ft_strcmp(av[1], "map"))
+	{
+		ft_putstr("Wrong input format\n");
+		exit(1);
+	}
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr("Wrong input format\n");
+		exit(1);
+	}
+}
 
 double	normalize_angle(double angle, t_wolf *sdl)
 {
