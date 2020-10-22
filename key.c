@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:18:51 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/20 10:21:35 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 13:40:11 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void	process(t_wolf *sdl, t_player *player)
 		if(sdl->event.type == SDL_KEYDOWN)
 			sdl_key_down(sdl, player);
 		if(sdl->event.type == SDL_KEYUP)
-		sdl_key_up(sdl, player);
+			sdl_key_up(sdl, player);
 }

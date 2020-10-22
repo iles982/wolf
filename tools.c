@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:24:45 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/20 10:12:46 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 14:40:33 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		map_has_wall(float y, float x, t_wolf *sdl)
 	int		map_x;
 
 	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
-		return (0);
+		return (1);
 	map_y = floor(y / sdl->tile_size);
 	map_x = floor(x / sdl->tile_size);
 	return (sdl->map[map_y][map_x] != 0);
