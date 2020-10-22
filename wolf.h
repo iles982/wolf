@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 14:40:06 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 18:31:45 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define WOLF_F
 # include <unistd.h>
 # include <stdio.h>
-# include <SDL2/SDL.h>
+# include "SDL2-2.0.12/include/SDL.h"
 # include <stdlib.h>
 # include <math.h>
 # include "libft/libft.h"
