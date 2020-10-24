@@ -6,11 +6,34 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:16:49 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/24 10:07:11 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/24 18:29:57 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void	free_map(t_wolf *sdl)
+{
+	int i = 0;
+	while (sdl->map)
+	{
+		free(sdl->map[i]);
+		i++;
+	}
+	free(sdl->map);
+}
+
+void	init_music(t_music *music)
+{;
+	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024) == -1) 
+	{
+		printf("Error initializing SDL_mixer: %s\n", Mix_GetError());
+		exit (1);
+	}
+	music->music = Mix_LoadMUS("YaYo.mp3");
+	Mix_VolumeMusic(30);
+	Mix_PlayMusic(music->music, -1);
+}
 
 void	init_window(t_wolf *sdl)
 {
@@ -35,16 +58,13 @@ void	init_window(t_wolf *sdl)
 	SDL_SetRenderDrawBlendMode(sdl->renderer, SDL_BLENDMODE_BLEND);
 }
 
-void	destroy_window(t_wolf *sdl)
+void	destroy_window(t_wolf *sdl, t_music *music)
 {
 	int i;
 
-	i = 0;
-	while (sdl->map[i])
-	{
-		free(sdl->map[i]);
-		i++;
-	}
+	Mix_FreeMusic(music->music);
+	Mix_CloseAudio();
+	free_map(sdl);
 	free(sdl->map);
 	free(sdl->color_buf);
 	SDL_RenderClear(sdl->renderer);
