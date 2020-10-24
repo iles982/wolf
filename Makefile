@@ -6,7 +6,7 @@
 #    By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/20 12:14:15 by tclarita          #+#    #+#              #
-#    Updated: 2020/10/20 10:13:55 by tclarita         ###   ########.fr        #
+#    Updated: 2020/10/23 12:23:21 by tclarita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME): $(OBJ) $(SRC)
 		@make -C $(LIBFT)
 		@gcc -c $(SRC)
 		@gcc -o $(NAME) $(FLAGS) $(OBJ) $(SDL) -lm libft/libft.a
-		make clean
+		# make clean
 
 clean:
 		@make clean -C $(LIBFT)
