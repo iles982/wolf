@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:13:57 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 13:57:26 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:59:06 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	setup(t_wolf *sdl, t_player *player)
 	sdl->color_buf_text = SDL_CreateTexture(sdl->renderer,
 										SDL_PIXELFORMAT_ABGR8888,
 	SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
-	sdl->textures[3] = (Uint32 *)DIRT;
-	sdl->textures[2] = (Uint32 *)BOOK;
-	sdl->textures[1] = (Uint32 *)STONE;
-	sdl->textures[0] = (Uint32 *)WALL;
+	sdl->textures[3] = (Uint32 *)g_dirt;
+	sdl->textures[2] = (Uint32 *)g_book;
+	sdl->textures[1] = (Uint32 *)g_stone;
+	sdl->textures[0] = (Uint32 *)g_wall;
 	get_player_pos(sdl, player);
 	player->height = 1;
 	player->width = 1;
