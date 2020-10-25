@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:16:49 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 11:25:43 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 12:33:11 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	destroy_window(t_wolf *sdl)
 	}
 	free(sdl->map);
 	free(sdl->color_buf);
+	free(sdl->wall_text);
 	SDL_RenderClear(sdl->renderer);
 	SDL_DestroyTexture(sdl->color_buf_text);
 	SDL_DestroyRenderer(sdl->renderer);

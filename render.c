@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 10:10:55 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/20 10:13:40 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 13:01:05 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,9 @@ void	clear_color_buf(Uint32 color, t_wolf *sdl)
 
 void	render(t_wolf *sdl, t_player *player, t_ray ray[1280])
 {
-	SDL_SetRenderDrawColor(sdl->renderer, 0, 0, 0, 255);
-	SDL_RenderClear(sdl->renderer);
-
 	generate_3d_projection(sdl, ray, player);
-
 	SDL_UpdateTexture(sdl->color_buf_text, NULL, sdl->color_buf, (int)((Uint32)WINDOW_WIDTH * sizeof(Uint32)));
 	SDL_RenderCopy(sdl->renderer, sdl->color_buf_text, NULL, NULL);
-	clear_color_buf(0xFF000000, sdl);
 	render_map(sdl);
 	render_rays(sdl, ray, player);
 	render_player(sdl, player);
