@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:18:51 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 10:33:00 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 13:51:09 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	sdl_key_up(t_wolf *sdl, t_player *player)
 void	process(t_wolf *sdl, t_player *player)
 {
 	SDL_PollEvent(&sdl->event);
-		if(sdl->event.type == SDL_QUIT)
-			destroy_window(sdl);
-		if(sdl->event.type == SDL_KEYDOWN)
-			sdl_key_down(sdl, player);
-		if(sdl->event.type == SDL_KEYUP)
-			sdl_key_up(sdl, player);
+	if (sdl->event.type == SDL_QUIT)
+		destroy_window(sdl);
+	if (sdl->event.type == SDL_KEYDOWN)
+		sdl_key_down(sdl, player);
+	if (sdl->event.type == SDL_KEYUP)
+		sdl_key_up(sdl, player);
 }

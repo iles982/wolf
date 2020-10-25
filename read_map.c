@@ -6,21 +6,21 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 12:13:01 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 12:29:40 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 13:52:23 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-int     get_height(char	*file)
+int		get_height(char	*file)
 {
     int		i;
 	char	*line;
 	int		fd;
 
-    i = 0;
+	i = 0;
 	fd = open(file, O_RDONLY);
-    while (get_next_line(fd, &line) > 0)
+	while (get_next_line(fd, &line) > 0)
 	{
 		i++;
 		free(line);
@@ -29,7 +29,7 @@ int     get_height(char	*file)
 	return (i);
 }
 
-int		get_width(char	*file)
+int		get_width(char *file)
 {
 	int		fd;
 	char	*line;
@@ -70,14 +70,14 @@ int		*fill_map(char *line, int *map_line)
 	return (map_line);
 }
 
-void	read_map(char	*file, t_wolf *sdl)
+void	read_map(char *file, t_wolf *sdl)
 {
 	int		i;
 	int		fd;
 	char	*line;
 
 	i = 0;
-    sdl->map_num_col = get_width(file);
+	sdl->map_num_col = get_width(file);
 	sdl->map_num_row = get_height(file);
 	sdl->map = (int **)malloc(sizeof(int *) * sdl->map_num_row);
 	fd = open(file, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:16:49 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 12:33:11 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 13:46:37 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	init_window(t_wolf *sdl)
 		exit(1);
 	}
 	sdl->window = SDL_CreateWindow("Wolf", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_BORDERLESS);
+		SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT,
+		SDL_WINDOW_BORDERLESS);
 	if (!(sdl->window))
 	{
 		ft_putstr("Window Error\n");
@@ -53,5 +54,5 @@ void	destroy_window(t_wolf *sdl)
 	SDL_DestroyRenderer(sdl->renderer);
 	SDL_DestroyWindow(sdl->window);
 	SDL_Quit();
-	exit (0);
+	exit(0);
 }

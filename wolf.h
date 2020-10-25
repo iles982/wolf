@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 12:08:38 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 14:06:29 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,15 @@ typedef struct		s_projection
 	float			distance_perp;
 	float			proj_wall_height;
 }					t_projection;
+
+typedef struct		s_map
+{
+	int				i;
+	int				j;
+	int				tile_x;
+	int				tile_y;
+	int				tile_color;
+}					t_map;
 
 
 void				read_map(char	*file, t_wolf *sdl);

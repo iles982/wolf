@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 10:10:55 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 13:01:05 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 14:08:50 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void	render_player(t_wolf *sdl, t_player *player)
 {
+	SDL_Rect player_rect;
+
 	SDL_SetRenderDrawColor(sdl->renderer, 251, 25, 25, 255);
-	SDL_Rect player_rect = {player->x * sdl->scale_factor, player->y * sdl->scale_factor,
-	player->width * sdl->scale_factor, player->height * sdl->scale_factor};
+	player_rect.x = player->x * sdl->scale_factor;
+	player_rect.y = player->y * sdl->scale_factor;
+	player_rect.w = player->width * sdl->scale_factor;
+	player_rect.h = player->height * sdl->scale_factor;
 	SDL_RenderFillRect(sdl->renderer, &player_rect);
-	SDL_RenderDrawLine(sdl->renderer, player->x * sdl->scale_factor, player->y * sdl->scale_factor,
+	SDL_RenderDrawLine(sdl->renderer, player->x * sdl->scale_factor,
+										player->y * sdl->scale_factor,
 	sdl->scale_factor * player->x + cos(player->rotat_angle) * 10,
 	sdl->scale_factor * player->y + sin(player->rotat_angle) * 10);
 }
@@ -38,28 +43,28 @@ void	render_rays(t_wolf *sdl, t_ray ray[1280], t_player *player)
 
 void	render_map(t_wolf *sdl)
 {
-	int	i;
-	int	j;
-	int	tile_x;
-	int	tile_y;
-	int	tile_color;
+	t_map		map[1];
+	SDL_Rect	map_tile_rect;
 
-	i = 0;
-	while (i < sdl->map_num_row)
+	map->i = 0;
+	while (map->i < sdl->map_num_row)
 	{
-		j = 0;
-		while (j < sdl->map_num_col)
+		map->j = 0;
+		while (map->j < sdl->map_num_col)
 		{
-			tile_x = j * sdl->tile_size;
-			tile_y = i * sdl->tile_size;
-			tile_color = sdl->map[i][j] != 0 ? 255 : 0;
-			SDL_SetRenderDrawColor(sdl->renderer, tile_color, tile_color, tile_color, tile_color);
-			SDL_Rect map_tile_rect = {tile_x * sdl->scale_factor, tile_y * sdl->scale_factor,
-			sdl->tile_size * sdl->scale_factor, sdl->tile_size * sdl->scale_factor};
+			map->tile_x = map->j * sdl->tile_size;
+			map->tile_y = map->i * sdl->tile_size;
+			map->tile_color = sdl->map[map->i][map->j] != 0 ? 255 : 0;
+			SDL_SetRenderDrawColor(sdl->renderer, map->tile_color,
+							map->tile_color, map->tile_color, map->tile_color);
+			map_tile_rect.x = map->tile_x * sdl->scale_factor;
+			map_tile_rect.y = map->tile_y * sdl->scale_factor;
+			map_tile_rect.w = sdl->tile_size * sdl->scale_factor;
+			map_tile_rect.h = map_tile_rect.w;
 			SDL_RenderFillRect(sdl->renderer, &map_tile_rect);
-			j++;
+			map->j++;
 		}
-		i++;
+		map->i++;
 	}
 }
 
@@ -74,7 +79,7 @@ void	clear_color_buf(Uint32 color, t_wolf *sdl)
 		y = 0;
 		while (y < WINDOW_HEIGHT)
 		{
-			sdl->color_buf[WINDOW_WIDTH  * y + x] = color;
+			sdl->color_buf[WINDOW_WIDTH * y + x] = color;
 			y++;
 		}
 		x++;
@@ -84,7 +89,8 @@ void	clear_color_buf(Uint32 color, t_wolf *sdl)
 void	render(t_wolf *sdl, t_player *player, t_ray ray[1280])
 {
 	generate_3d_projection(sdl, ray, player);
-	SDL_UpdateTexture(sdl->color_buf_text, NULL, sdl->color_buf, (int)((Uint32)WINDOW_WIDTH * sizeof(Uint32)));
+	SDL_UpdateTexture(sdl->color_buf_text, NULL, sdl->color_buf,
+					(int)((Uint32)WINDOW_WIDTH * sizeof(Uint32)));
 	SDL_RenderCopy(sdl->renderer, sdl->color_buf_text, NULL, NULL);
 	render_map(sdl);
 	render_rays(sdl, ray, player);

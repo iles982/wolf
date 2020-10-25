@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:13:57 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 12:08:19 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 13:57:26 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	setup(t_wolf *sdl, t_player *player)
 	sdl->fov_angle = 60 * (sdl->pi / 180);
 	sdl->num_rays = 1280;
 	sdl->scale_factor = 0.27;
-	sdl->color_buf = (Uint32 *)malloc(sizeof(Uint32) * (Uint32)WINDOW_HEIGHT * (Uint32)WINDOW_WIDTH);
-	sdl->color_buf_text = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_ABGR8888,
+	sdl->color_buf = (Uint32 *)malloc(sizeof(Uint32) *
+				(Uint32)WINDOW_HEIGHT * (Uint32)WINDOW_WIDTH);
+	sdl->color_buf_text = SDL_CreateTexture(sdl->renderer,
+										SDL_PIXELFORMAT_ABGR8888,
 	SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 	sdl->textures[3] = (Uint32 *)DIRT;
 	sdl->textures[2] = (Uint32 *)BOOK;

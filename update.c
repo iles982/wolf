@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:22:14 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 14:41:56 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 14:12:15 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	move_player(t_wolf *sdl, t_player *player, float delta_time)
 	float new_player_x;
 	float new_player_y;
 
-	player->rotat_angle += player->turn_direction * player->turn_speed * delta_time;
+	player->rotat_angle += player->turn_direction * player->turn_speed
+													* delta_time;
 	move_step = player->walk_direction * player->walk_speed;
 	new_player_x = player->x + cos(player->rotat_angle) * move_step;
 	new_player_y = player->y + sin(player->rotat_angle) * move_step;
