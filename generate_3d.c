@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 11:01:19 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 15:20:34 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 15:21:50 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	generate_3d_projection_1(t_wolf * sdl, t_ray ray[1280],
 
 void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
 {
-	t_projection p;
-	Uint32 texel_color;
+	t_projection	p;
+	Uint32			texel_color;
 
 	p.i = 0;
 	while (p.i < sdl->num_rays)
