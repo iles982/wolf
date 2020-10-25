@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 11:01:19 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 15:21:50 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 15:26:58 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,26 @@ void	generate_3d_projection_1(t_wolf * sdl, t_ray ray[1280],
 		p->text_offset_x = (int)ray[p->i].wall_hit_x % sdl->tile_size;
 }
 
+void	fill_color_buf(t_wolf *sdl, t_projection *p)
+{
+	while (p->y < WINDOW_HEIGHT)
+	{
+		sdl->color_buf[WINDOW_WIDTH * p->y + p->i] = 0xFF777777;
+		p->y++;
+	}
+}
+
 void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
 {
 	t_projection	p;
 	Uint32			texel_color;
+	int				text_num;
 
 	p.i = 0;
 	while (p.i < sdl->num_rays)
 	{
 		generate_3d_projection_1(sdl, ray, player, &p);
-		int text_num = ray[p.i].wall_hit - 1;
+		text_num = ray[p.i].wall_hit - 1;
 		while (p.y < p.wall_bot_pix)
 		{
 			p.distance_from_top = p.y + (p.wall_strip_height / 2) -
@@ -60,11 +70,7 @@ void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
 			p.y++;
 		}
 		p.y = p.wall_bot_pix;
-		while (p.y < WINDOW_HEIGHT)
-		{
-			sdl->color_buf[WINDOW_WIDTH * p.y + p.i] = 0xFF777777;
-			p.y++;
-		}
+		fill_color_buf(sdl, &p);
 		p.i++;
 	}
 }
