@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 10:10:55 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 14:08:50 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 15:30:00 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	render_player(t_wolf *sdl, t_player *player)
 
 void	render_rays(t_wolf *sdl, t_ray ray[1280], t_player *player)
 {
+	int i;
+
+	i = 0;
 	SDL_SetRenderDrawColor(sdl->renderer, 76, 0, 153, 255);
-	int i = 0;
 	while (i < sdl->num_rays)
 	{
 		SDL_RenderDrawLine(sdl->renderer, sdl->scale_factor * player->x,
