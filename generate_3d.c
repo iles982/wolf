@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 11:01:19 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 13:56:18 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 15:20:34 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	generate_3d_projection_1(t_wolf * sdl, t_ray ray[1280],
 void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
 {
 	t_projection p;
+	Uint32 texel_color;
 
 	p.i = 0;
 	while (p.i < sdl->num_rays)
@@ -53,7 +54,7 @@ void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
 												(WINDOW_HEIGHT / 2);
 			p.text_offset_y = p.distance_from_top *
 				((float)TEXTURE_HEIGHT / p.wall_strip_height);
-			Uint32 texel_color = sdl->textures[text_num][(TEXTURE_HEIGHT
+			texel_color = sdl->textures[text_num][(TEXTURE_HEIGHT
 							* p.text_offset_y) + p.text_offset_x];
 			sdl->color_buf[(WINDOW_WIDTH * p.y) + p.i] = texel_color;
 			p.y++;
