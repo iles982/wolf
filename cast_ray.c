@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:26:37 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 14:11:47 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:37:17 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	cast_loop_2(t_cast *a, t_wolf *sdl)
 			a->vert_wall_content = sdl->map[(int)floor(a->y_to_check /
 				sdl->tile_size)][(int)floor(a->x_to_check / sdl->tile_size)];
 			a->vert_wall_hit = 1;
-			break;
+			break ;
 		}
 		else
 		{

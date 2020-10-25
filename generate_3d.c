@@ -6,13 +6,13 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 11:01:19 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 15:26:58 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:37:04 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void	generate_3d_projection_1(t_wolf * sdl, t_ray ray[1280],
+void	generate_3d_projection_1(t_wolf *sdl, t_ray ray[1280],
 								t_player *player, t_projection *p)
 {
 	p->distance_perp = ray[p->i].distance * cos(ray[p->i].ray_angle -
@@ -25,7 +25,7 @@ void	generate_3d_projection_1(t_wolf * sdl, t_ray ray[1280],
 	p->wall_bot_pix = (WINDOW_HEIGHT / 2) + (p->wall_strip_height / 2);
 	p->wall_bot_pix = p->wall_bot_pix > WINDOW_HEIGHT ? WINDOW_HEIGHT :
 													p->wall_bot_pix;
-    p->y = 0;
+	p->y = 0;
 	while (p->y < p->wall_top_pix)
 	{
 		sdl->color_buf[WINDOW_WIDTH * p->y + p->i] = 0xFF0080FF;
@@ -47,7 +47,7 @@ void	fill_color_buf(t_wolf *sdl, t_projection *p)
 	}
 }
 
-void	generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player)
+void	generate_3d_projection(t_wolf *sdl, t_ray ray[1280], t_player *player)
 {
 	t_projection	p;
 	Uint32			texel_color;

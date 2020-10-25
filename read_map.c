@@ -6,15 +6,15 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 12:13:01 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 13:52:23 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:36:22 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-int		get_height(char	*file)
+int		get_height(char *file)
 {
-    int		i;
+	int		i;
 	char	*line;
 	int		fd;
 

@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 14:06:29 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:39:03 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,28 +127,23 @@ typedef struct		s_map
 	int				tile_color;
 }					t_map;
 
-
 void				read_map(char	*file, t_wolf *sdl);
 void				setup(t_wolf *sdl, t_player *player);
-double				init_cast(t_cast *a, t_wolf *sdl, double ray_angle, t_player *player);
+double				init_cast(t_cast *a, t_wolf *sdl,
+					double ray_angle, t_player *player);
 void				render(t_wolf *sdl, t_player *player, t_ray ray[1280]);
-
-
 void				check_input(int ac, char **av);
 void    			init_window(t_wolf *sdl);
 void				destroy_window(t_wolf *sdl);
-
-
 void				process(t_wolf *sdl, t_player *player);
 void				update(t_wolf *sdl, t_player *player, t_ray ray[1280]);
-void				cast_ray(double ray_angle, t_wolf *sdl, t_player *player, t_ray *ray);
-
-
+void				cast_ray(double ray_angle, t_wolf *sdl,
+								t_player *player, t_ray *ray);
 int					map_has_wall(float y, float x, t_wolf *sdl);
 double				normalize_angle(double angle, t_wolf *sdl);
 float				distance_between(float x1, float y1, float x2, float y2);
-
-
-void				cast_ray(double ray_angle, t_wolf *sdl, t_player *player, t_ray *ray);
-void				generate_3d_projection(t_wolf * sdl, t_ray ray[1280], t_player *player);
+void				cast_ray(double ray_angle, t_wolf *sdl,
+							t_player *player, t_ray *ray);
+void				generate_3d_projection(t_wolf *sdl,
+						t_ray ray[1280], t_player *player);
 #endif
