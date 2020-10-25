@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 12:13:01 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 10:37:17 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 12:11:12 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int     get_height(char	*file)
 		i++;
 		free(line);
 	}
-	free(line);
 	close(fd);
 	return (i);
 }

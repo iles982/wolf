@@ -6,39 +6,11 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:26:37 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 14:27:17 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 12:08:08 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-double	init_cast(t_cast *a, t_wolf *sdl, double ray_angle, t_player *player)
-{
-	a->horz_wall_hit_x = 0;
-	a->horz_wall_hit_y = 0;
-	a->horz_wall_hit = 0;
-	a->horz_wall_content = 0;
-	a->vert_wall_hit_x = 0;
-	a->vert_wall_hit_y = 0;
-	a->vert_wall_hit = 0;
-	a->vert_wall_content = 0;
-	ray_angle = normalize_angle(ray_angle, sdl);
-	a->ray_face_down = ray_angle > 0 && ray_angle < sdl->pi;
-	a->ray_face_up = !a->ray_face_down;
-	a->ray_face_right = ray_angle < 0.5 * sdl->pi || ray_angle > 1.5 * sdl->pi;
-	a->ray_face_left = !a->ray_face_right;
-	a->y_inter = floor(player->y / sdl->tile_size) * sdl->tile_size;
-	a->y_inter += a->ray_face_down ? sdl->tile_size : 0;
-	a->x_inter = player->x + (a->y_inter - player->y) / tan(ray_angle);
-	a->y_step = sdl->tile_size;
-	a->y_step *= a->ray_face_up ? -1 : 1;
-	a->x_step = sdl->tile_size / tan(ray_angle);
-	a->x_step *= (a->ray_face_left && a->x_step > 0) ? -1 : 1;
-	a->x_step *= (a->ray_face_right && a->x_step < 0) ? -1 : 1;
-	a->next_horz_touch_x = a->x_inter;
-	a->next_horz_touch_y = a->y_inter;
-	return (ray_angle);
-}
 
 void	cast_loop(t_cast *a, t_wolf *sdl)
 {

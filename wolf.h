@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 10:36:53 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 12:08:38 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct		s_projection
 
 void				read_map(char	*file, t_wolf *sdl);
 void				setup(t_wolf *sdl, t_player *player);
+double				init_cast(t_cast *a, t_wolf *sdl, double ray_angle, t_player *player);
 void				render(t_wolf *sdl, t_player *player, t_ray ray[1280]);
 
 
