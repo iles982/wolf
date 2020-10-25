@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/24 18:33:01 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 10:36:53 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <SDL2/SDL.h>
-# include <SDL2/SDL_mixer.h>
 # include <stdlib.h>
 # include <math.h>
 # include "libft/libft.h"
@@ -24,12 +23,6 @@
 # define WINDOW_HEIGHT 832
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-
-typedef struct		s_music
-{
-	Mix_Music		*music;
-}					t_music;
-
 
 typedef struct		s_cast
 {
@@ -126,18 +119,17 @@ typedef struct		s_projection
 }					t_projection;
 
 
-int					**read_map(char	*file, t_wolf *sdl);
+void				read_map(char	*file, t_wolf *sdl);
 void				setup(t_wolf *sdl, t_player *player);
 void				render(t_wolf *sdl, t_player *player, t_ray ray[1280]);
 
 
 void				check_input(int ac, char **av);
 void    			init_window(t_wolf *sdl);
-void				init_music(t_music *music);
-void				destroy_window(t_wolf *sdl, t_music *music);
+void				destroy_window(t_wolf *sdl);
 
 
-void				process(t_wolf *sdl, t_player *player, t_music *music);
+void				process(t_wolf *sdl, t_player *player);
 void				update(t_wolf *sdl, t_player *player, t_ray ray[1280]);
 void				cast_ray(double ray_angle, t_wolf *sdl, t_player *player, t_ray *ray);
 

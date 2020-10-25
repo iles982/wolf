@@ -6,7 +6,7 @@
 #    By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/20 12:14:15 by tclarita          #+#    #+#              #
-#    Updated: 2020/10/24 18:17:15 by tclarita         ###   ########.fr        #
+#    Updated: 2020/10/25 10:27:25 by tclarita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ = $(SRC:.c=.o)
 HEADER = wolf.h
 
 FLAGS = -Wall -Wextra -Werror -I $(HEADER)
-SDL = -lSDL2 -lSDL2_mixer
+SDL = -lSDL2
 
 LIBFT = libft
 

@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 12:13:01 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/24 18:26:48 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/25 10:37:17 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ int		*fill_map(char *line, int *map_line)
 	return (map_line);
 }
 
-int		**read_map(char	*file, t_wolf *sdl)
+void	read_map(char	*file, t_wolf *sdl)
 {
-	int		**map;
 	int		i;
 	int		fd;
 	char	*line;
@@ -81,15 +80,14 @@ int		**read_map(char	*file, t_wolf *sdl)
 	i = 0;
     sdl->map_num_col = get_width(file);
 	sdl->map_num_row = get_height(file);
-	map = (int **)malloc(sizeof(int *) * sdl->map_num_row);
+	sdl->map = (int **)malloc(sizeof(int *) * sdl->map_num_row);
 	fd = open(file, O_RDONLY);
 	while (i < sdl->map_num_row && get_next_line(fd, &line) > 0)
 	{
-		map[i] = (int *)malloc(sizeof(int) * sdl->map_num_col);
-		map[i] = fill_map(line, map[i]);
+		sdl->map[i] = (int *)malloc(sizeof(int) * sdl->map_num_col);
+		sdl->map[i] = fill_map(line, sdl->map[i]);
 		free(line);
 		i++;
 	}
 	close(fd);
-	return (map);
 }
