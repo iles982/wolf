@@ -6,12 +6,12 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 12:14:40 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 18:39:03 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/26 10:34:10 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF_F
-# define WOLF_F
+#ifndef WOLF_H
+# define WOLF_H
 # include <unistd.h>
 # include <stdio.h>
 # include <SDL2/SDL.h>
@@ -133,7 +133,7 @@ double				init_cast(t_cast *a, t_wolf *sdl,
 					double ray_angle, t_player *player);
 void				render(t_wolf *sdl, t_player *player, t_ray ray[1280]);
 void				check_input(int ac, char **av);
-void    			init_window(t_wolf *sdl);
+void				init_window(t_wolf *sdl);
 void				destroy_window(t_wolf *sdl);
 void				process(t_wolf *sdl, t_player *player);
 void				update(t_wolf *sdl, t_player *player, t_ray ray[1280]);

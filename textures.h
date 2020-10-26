@@ -6,9 +6,12 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 10:43:03 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 18:59:23 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/26 10:35:00 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef TEXTURES_H
+# define TEXTURES_H
 
 #include "wolf.h"
 
@@ -3227,3 +3230,4 @@ const Uint32 g_bricks[4096] = {
 	0x00ffffff, 0x00ffffff, 0x00ffffff, 0x00ffffff, 0x00ffffff, 0x00ffffff,
 	0x00ffffff, 0x00ffffff, 0x00ffffff, 0x00ffffff
 };
+#endif
