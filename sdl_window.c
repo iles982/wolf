@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 12:16:49 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 13:46:37 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/28 09:31:56 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_window(t_wolf *sdl)
 	}
 	sdl->window = SDL_CreateWindow("Wolf", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT,
-		SDL_WINDOW_BORDERLESS);
+		SDL_WINDOW_RESIZABLE);
 	if (!(sdl->window))
 	{
 		ft_putstr("Window Error\n");

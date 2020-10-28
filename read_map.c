@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 12:13:01 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/25 18:36:22 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/28 09:51:10 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		*fill_map(char *line, int *map_line)
 	while (tmp[i])
 	{
 		map_line[i] = ft_atoi(tmp[i]);
+		if (map_line[i] > 4 && map_line[i] < 9)
+			map_line[i] = 2;
 		free(tmp[i]);
 		i++;
 	}
