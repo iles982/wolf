@@ -6,14 +6,14 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 10:43:03 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/26 10:35:00 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/28 12:00:51 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEXTURES_H
 # define TEXTURES_H
 
-#include "wolf.h"
+# include "wolf.h"
 
 const Uint32 g_wall[] = {
 	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
